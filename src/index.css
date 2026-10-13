@@ -1,0 +1,4 @@
+/* Base reset lives lightly here; theme in App.css */
+button {
+  appearance: none;
+}
