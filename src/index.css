@@ -1,4 +1,94 @@
-/* Base reset lives lightly here; theme in App.css */
-button {
-  appearance: none;
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+
+  --color-ink: #152a26;
+  --color-muted: #4d6b63;
+  --color-paper: #f3f7f5;
+  --color-panel: rgb(255 255 255 / 0.78);
+  --color-line: rgb(21 42 38 / 0.12);
+  --color-teal: #1a6b5c;
+  --color-teal-deep: #0f3d36;
+  --color-teal-hover: #145347;
+  --color-mint: #7ec8b8;
+  --color-sand: #e7d7b8;
+  --color-mint-soft: #e8f7f3;
+  --color-foam: #f3faf7;
+
+  --shadow-panel: 0 24px 60px rgb(15 61 54 / 0.18);
+  --radius-panel: 28px;
+
+  --animate-rise: rise 0.55s ease both;
+  --animate-pulse-soft: pulse-soft 1s ease infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: var(--color-paper);
+    line-height: 1.45;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  button {
+    appearance: none;
+  }
+}
+
+/* Multi-layer atmosphere is awkward as utilities — keep once here */
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 10%, rgb(126 200 184 / 0.45), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 90% 20%, rgb(231 215 184 / 0.55), transparent 50%),
+    linear-gradient(165deg, #eef6f3 0%, #d9ebe5 45%, #c5ddd5 100%);
+}
+
+.atmosphere::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
 }
